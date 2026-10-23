@@ -137,7 +137,7 @@
    "@type": "Offer",
    "itemOffered": {
     "@type": "Product",
-    "name": "Kombucha: Blue Ternate, Moringa, Roselle Flower, Turmeric"
+    "name": "Kombucha: Blue Ternate, Moringa, Roselle Flower, Turmeric-Ginger"
    }
   },
   {
@@ -269,18 +269,18 @@ section{padding-block:88px}
 .kb-head .section-head{margin-bottom:0}
 .flavors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .flavor{background:var(--white);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;min-width:0}
-.flavor-art{height:210px;display:flex;align-items:flex-end;justify-content:center;padding-top:20px;position:relative}
-.flavor-art::before{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:0 100% 0 100%;opacity:.35;background:#fff}
-.flavor-art svg{position:relative;height:180px;width:auto}
+.flavor-art{aspect-ratio:4/5;position:relative;overflow:hidden}
+.kb-photo{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;transition:transform .5s ease}
+.flavor:hover .kb-photo{transform:scale(1.03)}
 .flavor-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
 .flavor h3{font-size:1.45rem}
 .flavor p{color:var(--ink-muted);font-size:15.5px;line-height:1.55}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
 .tag{font-size:12.5px;font-weight:500;letter-spacing:.04em;padding:4px 10px;border-radius:999px;background:var(--husk);color:var(--ink)}
-.f-blue .flavor-art{background:#3E3A8C}.f-blue h3{color:#3E3A8C}
-.f-green .flavor-art{background:#689A36}.f-green h3{color:var(--forest)}
-.f-red .flavor-art{background:#9E1F3D}.f-red h3{color:#9E1F3D}
-.f-gold .flavor-art{background:#E2A63B}.f-gold h3{color:var(--bark)}
+.f-blue h3{color:#3E3A8C}
+.f-green h3{color:var(--forest)}
+.f-red h3{color:#9E1F3D}
+.f-gold h3{color:var(--bark)}
 .kb-note{margin-top:28px;display:flex;align-items:center;gap:14px;font-size:15px;color:var(--ink-muted)}
 .kb-note .leaf{margin-top:0}
 @media (max-width:1000px){.flavors{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -396,14 +396,15 @@ textarea{min-height:120px;resize:vertical}
 .panel li:hover .leaf,.kb-note:hover .leaf{animation:spSway .9s ease-in-out infinite alternate}
 /* Blue Ternate: squeeze calamansi, watch it turn pink */
 .f-blue .flavor-art,.f-blue h3{transition:background-color 1.2s ease,color 1.2s ease}
-.bt-liquid{transition:fill 1.4s ease .35s}
-.bt-drop{opacity:0}
-.f-blue.squeezed .flavor-art{background:#8C2A6B}
+/* photo version: hue shifts violet -> pink, pink glow fills up from the bottom */
+.f-blue .kb-photo{transition:filter 1.4s ease .35s,transform .5s ease}
+.f-blue .flavor-art::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(236,92,160,.55),rgba(236,92,160,0) 70%);mix-blend-mode:color;transform:translateY(100%);transition:transform 1.4s ease .35s;pointer-events:none}
+.f-blue.squeezed .kb-photo{filter:hue-rotate(48deg) saturate(1.2)}
+.f-blue.squeezed .flavor-art::after{transform:none}
 .f-blue.squeezed h3{color:#8C2A6B}
-.f-blue.squeezed .bt-liquid{fill:#E784BE}
-.bt-leaf{transition:fill 1.4s ease .35s}.f-blue.squeezed .bt-leaf{fill:#8C2A6B}
-.f-blue.dropping .bt-drop{animation:btDrop .6s ease-in forwards}
-@keyframes btDrop{0%{opacity:1;transform:translateY(0)}85%{opacity:1}100%{opacity:0;transform:translateY(62px)}}
+.bt-drop{position:absolute;left:50%;top:6%;width:18px;height:18px;margin-left:-9px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:radial-gradient(circle at 35% 35%,#E4F29A,#7FA83A);opacity:0;z-index:2;pointer-events:none}
+.f-blue.dropping .bt-drop{animation:btDrop .7s ease-in forwards}
+@keyframes btDrop{0%{opacity:1;transform:translateY(0) rotate(-45deg)}85%{opacity:1}100%{opacity:0;transform:translateY(260px) rotate(-45deg)}}
 .squeeze{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid #3E3A8C;background:transparent;color:#3E3A8C;font:600 14px var(--sans);cursor:pointer;transition:background .2s,color .2s,border-color 1.2s}
 .squeeze:hover{background:#3E3A8C;color:#fff}
 .f-blue.squeezed .squeeze{border-color:#8C2A6B;color:#8C2A6B}
@@ -416,7 +417,7 @@ textarea{min-height:120px;resize:vertical}
   .sp-stem{animation:none;stroke-dashoffset:0}.sp-leaf{animation:none;transform:none}
   .anim .layers-icon rect{transform:none;transition:none}
   .panel li:hover .leaf,.kb-note:hover .leaf,.sprout:hover .sp-leaf{animation:none}
-  .bt-liquid,.f-blue .flavor-art,.f-blue h3{transition:none}.f-blue.dropping .bt-drop{animation:none}
+  .f-blue .kb-photo,.f-blue .flavor-art::after,.f-blue h3{transition:none}.f-blue.dropping .bt-drop{animation:none}
 }
 
 /* Footer */
@@ -571,7 +572,7 @@ textarea{min-height:120px;resize:vertical}
       <div class="line-title" style="margin-top:56px"><h3>Kombucha</h3><span>Brewed with plants from our garden</span></div>
       <div class="flavors">
         <article class="flavor f-blue" id="blueTernate" data-grow style="--d:0.00s">
-          <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path class="bt-liquid" d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#8E88E6"/><circle class="bt-drop" cx="40" cy="30" r="5" fill="#C8E36B"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path class="bt-leaf" d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#3E3A8C"/></svg></div>
+          <div class="flavor-art"><img class="kb-photo" src="assets/kombucha-blue-ternate.webp" width="540" height="810" alt="Blue Ternate kombucha bottle with fresh butterfly pea flowers" loading="lazy" decoding="async"><span class="bt-drop" aria-hidden="true"></span></div>
           <div class="flavor-body">
             <h3>Blue Ternate</h3>
             <p>A deep blue-purple brew made with butterfly pea flowers from our garden. Add a squeeze of citrus and watch it change color.</p>
@@ -581,7 +582,7 @@ textarea{min-height:120px;resize:vertical}
           </div>
         </article>
         <article class="flavor f-green" data-grow style="--d:0.10s">
-          <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#C9E4A0"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#3A603C"/></svg></div>
+          <div class="flavor-art"><img class="kb-photo" src="assets/kombucha-moringa.webp" width="540" height="810" alt="Moringa kombucha bottle with fresh moringa leaves and pods" loading="lazy" decoding="async"></div>
           <div class="flavor-body">
             <h3>Moringa</h3>
             <p>Our vibrant green kombucha, infused with fresh moringa leaves from the “miracle tree”. Packed with vitamins A, C and E, calcium and amino acids.</p>
@@ -589,7 +590,7 @@ textarea{min-height:120px;resize:vertical}
           </div>
         </article>
         <article class="flavor f-red" data-grow style="--d:0.20s">
-          <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#E78A9D"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#9E1F3D"/></svg></div>
+          <div class="flavor-art"><img class="kb-photo" src="assets/kombucha-roselle.webp" width="540" height="810" alt="Roselle kombucha bottle with ruby-red roselle calyces" loading="lazy" decoding="async"></div>
           <div class="flavor-body">
             <h3>Roselle Flower</h3>
             <p>A ruby-red brew of roselle (hibiscus) flowers harvested from our farm. Tart, refreshing and high in vitamin C.</p>
@@ -597,10 +598,10 @@ textarea{min-height:120px;resize:vertical}
           </div>
         </article>
         <article class="flavor f-gold" data-grow style="--d:0.30s">
-          <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#F8DA97"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#6B4C25"/></svg></div>
+          <div class="flavor-art"><img class="kb-photo" src="assets/kombucha-turmeric-ginger.webp" width="540" height="810" alt="Turmeric-ginger kombucha bottle with fresh turmeric and ginger roots" loading="lazy" decoding="async"></div>
           <div class="flavor-body">
-            <h3>Turmeric</h3>
-            <p>A golden, earthy brew made with turmeric root and a gentle peppery warmth. Smooth, lightly spiced and great over ice.</p>
+            <h3>Turmeric-Ginger</h3>
+            <p>A golden, earthy brew made with turmeric and ginger root, with a gentle peppery warmth. Smooth, lightly spiced and great over ice.</p>
             <div class="tags"><span class="tag">Rich in curcumin</span><span class="tag">Antioxidants</span><span class="tag">Gut-friendly probiotics</span></div>
           </div>
         </article>
