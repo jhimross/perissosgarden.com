@@ -371,6 +371,54 @@ textarea{min-height:120px;resize:vertical}
 @media (max-width:900px){.g-grid{grid-auto-rows:160px}}
 @media (max-width:480px){.g-grid{grid-auto-rows:130px;gap:10px}.g-item figcaption{font-size:12px;padding:22px 10px 8px}}
 
+/* ---------- Motion: farm-themed, gentle, respects reduced motion ---------- */
+/* Grow-in on scroll (only when JS adds .anim to <html>) */
+.anim [data-grow]{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.anim [data-grow].grown{opacity:1;transform:none}
+/* Hero sprout grows on load */
+.hero-script{display:flex;align-items:flex-end;gap:10px}
+.sprout{flex:0 0 auto;overflow:visible}
+.sp-stem{stroke-dasharray:40;stroke-dashoffset:40;animation:spStem 1.1s .5s ease-out forwards}
+.sp-leaf{transform-box:fill-box;transform:scale(0);animation:spLeaf .7s ease-out forwards}
+.sp-l{transform-origin:100% 100%;animation-delay:1.2s}
+.sp-r{transform-origin:0% 100%;animation-delay:1.5s}
+@keyframes spStem{to{stroke-dashoffset:0}}
+@keyframes spLeaf{to{transform:scale(1)}}
+.sprout:hover .sp-leaf{animation:spSway 1.6s ease-in-out infinite alternate;transform:scale(1)}
+@keyframes spSway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+/* Syntropic layers icon builds canopy-down when it grows in */
+.layers-icon rect{transform-box:fill-box;transform-origin:50% 50%}
+.anim .layers-icon rect{transform:scaleX(0);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.anim .grown .layers-icon rect{transform:scaleX(1)}
+.anim .grown .layers-icon rect:nth-child(2){transition-delay:.15s}
+.anim .grown .layers-icon rect:nth-child(3){transition-delay:.3s}
+/* Leaf bullets sway on hover */
+.panel li:hover .leaf,.kb-note:hover .leaf{animation:spSway .9s ease-in-out infinite alternate}
+/* Blue Ternate: squeeze calamansi, watch it turn pink */
+.f-blue .flavor-art,.f-blue h3{transition:background-color 1.2s ease,color 1.2s ease}
+.bt-liquid{transition:fill 1.4s ease .35s}
+.bt-drop{opacity:0}
+.f-blue.squeezed .flavor-art{background:#8C2A6B}
+.f-blue.squeezed h3{color:#8C2A6B}
+.f-blue.squeezed .bt-liquid{fill:#E784BE}
+.bt-leaf{transition:fill 1.4s ease .35s}.f-blue.squeezed .bt-leaf{fill:#8C2A6B}
+.f-blue.dropping .bt-drop{animation:btDrop .6s ease-in forwards}
+@keyframes btDrop{0%{opacity:1;transform:translateY(0)}85%{opacity:1}100%{opacity:0;transform:translateY(62px)}}
+.squeeze{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid #3E3A8C;background:transparent;color:#3E3A8C;font:600 14px var(--sans);cursor:pointer;transition:background .2s,color .2s,border-color 1.2s}
+.squeeze:hover{background:#3E3A8C;color:#fff}
+.f-blue.squeezed .squeeze{border-color:#8C2A6B;color:#8C2A6B}
+.f-blue.squeezed .squeeze:hover{background:#8C2A6B;color:#fff}
+.calamansi{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#E4F29A,#7FA83A);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.squeeze:active .calamansi{transform:scale(.8)}
+.sq-note{font-size:13.5px;color:#8C2A6B;min-height:0}
+@media (prefers-reduced-motion:reduce){
+  .anim [data-grow]{opacity:1;transform:none;transition:none}
+  .sp-stem{animation:none;stroke-dashoffset:0}.sp-leaf{animation:none;transform:none}
+  .anim .layers-icon rect{transform:none;transition:none}
+  .panel li:hover .leaf,.kb-note:hover .leaf,.sprout:hover .sp-leaf{animation:none}
+  .bt-liquid,.f-blue .flavor-art,.f-blue h3{transition:none}.f-blue.dropping .bt-drop{animation:none}
+}
+
 /* Footer */
 .site-footer{background:var(--canopy);color:var(--mist);padding-block:56px 32px}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
@@ -424,7 +472,7 @@ textarea{min-height:120px;resize:vertical}
           <a class="btn btn-primary" href="#produce">See what's fresh</a>
           <a class="text-link" href="#products">Our farm products →</a>
         </div>
-        <p class="script">Cultivating abundant life. Stewarding God's creation.</p>
+        <p class="script hero-script"><svg class="sprout" viewBox="0 0 40 48" width="40" height="48" aria-hidden="true"><path class="sp-soil" d="M2 46 C10 40 30 40 38 46Z" fill="#6B4C25"/><path class="sp-stem" d="M20 44 C20 34 19 26 20 16" fill="none" stroke="#3A603C" stroke-width="3" stroke-linecap="round"/><path class="sp-leaf sp-l" d="M20 24 C12 24 6 18 6 10 C14 10 20 16 20 24Z" fill="#689A36"/><path class="sp-leaf sp-r" d="M20 18 C28 18 34 12 34 4 C26 4 20 10 20 18Z" fill="#689A36"/></svg>Cultivating abundant life. Stewarding God's creation.</p>
       </div>
 
       <!-- Hero photo: Perissos farm image -->
@@ -441,7 +489,7 @@ textarea{min-height:120px;resize:vertical}
   <!-- PRODUCE + ORDER -->
   <section id="produce" style="padding-top:0">
     <div class="wrap split">
-      <div class="panel light">
+      <div class="panel light" data-grow>
         <p class="eyebrow">Fresh from the garden</p>
         <h2>Fresh produce, no chemicals</h2>
         <p style="color:var(--ink-muted)">Vegetables, fruit and herbs grown in living soil and harvested when they're ready. What's available changes with the season.</p>
@@ -452,7 +500,7 @@ textarea{min-height:120px;resize:vertical}
         </ul>
         <a class="btn btn-primary" href="#contact">Ask what's fresh</a>
       </div>
-      <div class="panel forest">
+      <div class="panel forest" data-grow style="--d:.12s">
         <p class="eyebrow">How to order</p>
         <h2>Three easy ways</h2>
         <ul>
@@ -470,7 +518,7 @@ textarea{min-height:120px;resize:vertical}
   <section id="products" class="products-band">
     <div class="wrap">
       <div class="kb-head">
-        <div class="section-head">
+        <div class="section-head" data-grow>
           <p class="eyebrow">Farm products</p>
           <h2>More from our farm</h2>
           <p class="lead">Besides fresh produce, we raise pigs, grow mushrooms and herbs, brew kombucha and make our own compost. Ask us what's available this week.</p>
@@ -479,7 +527,7 @@ textarea{min-height:120px;resize:vertical}
       </div>
       <div class="line-title"><h3>Also from the farm</h3><span>Raised, grown and made at Perissos</span></div>
       <div class="farm-goods">
-        <article class="good">
+        <article class="good" data-grow style="--d:0.00s">
           <div class="good-art a-pig"><img src="assets/pork.jpg" width="640" height="427" alt="Pigs on the farm" loading="lazy" decoding="async"></div>
           <div class="good-body">
             <h3>Pork <span class="local">Baboy</span></h3>
@@ -487,7 +535,7 @@ textarea{min-height:120px;resize:vertical}
             <div class="tags"><span class="tag">Live weight</span><span class="tag">Pork meat</span><span class="tag">Whole lechon</span></div>
           </div>
         </article>
-        <article class="good">
+        <article class="good" data-grow style="--d:0.08s">
           <div class="good-art a-mush"><img src="assets/mushroom.jpg" width="640" height="427" alt="Fresh mushrooms" loading="lazy" decoding="async"></div>
           <div class="good-body">
             <h3>Mushrooms</h3>
@@ -495,7 +543,7 @@ textarea{min-height:120px;resize:vertical}
             <div class="tags"><span class="tag">Fresh harvest</span><span class="tag">Several varieties</span></div>
           </div>
         </article>
-        <article class="good">
+        <article class="good" data-grow style="--d:0.16s">
           <div class="good-art a-pea"><img src="assets/pigeon-pea.jpeg" width="596" height="335" alt="Fresh kardis (pigeon pea) pods" loading="lazy" decoding="async"></div>
           <div class="good-body">
             <h3>Pigeon Pea <span class="local">Kardis</span></h3>
@@ -503,7 +551,7 @@ textarea{min-height:120px;resize:vertical}
             <div class="tags"><span class="tag">Fresh or dried pods</span></div>
           </div>
         </article>
-        <article class="good">
+        <article class="good" data-grow style="--d:0.24s">
           <div class="good-art a-grass"><img src="assets/lemon-grass.webp" width="640" height="400" alt="Bundle of fresh lemongrass stalks" loading="lazy" decoding="async"></div>
           <div class="good-body">
             <h3>Lemongrass <span class="local">Tanglad</span></h3>
@@ -511,7 +559,7 @@ textarea{min-height:120px;resize:vertical}
             <div class="tags"><span class="tag">Fresh stalks</span></div>
           </div>
         </article>
-        <article class="good">
+        <article class="good" data-grow style="--d:0.32s">
           <div class="good-art a-sack"><img src="assets/fertilizer.webp" width="640" height="427" alt="Hand holding rich dark compost" loading="lazy" decoding="async"></div>
           <div class="good-body">
             <h3>Organic Fertilizer</h3>
@@ -522,15 +570,17 @@ textarea{min-height:120px;resize:vertical}
       </div>
       <div class="line-title" style="margin-top:56px"><h3>Kombucha</h3><span>Brewed with plants from our garden</span></div>
       <div class="flavors">
-        <article class="flavor f-blue">
-          <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#8E88E6"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#3E3A8C"/></svg></div>
+        <article class="flavor f-blue" id="blueTernate" data-grow style="--d:0.00s">
+          <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path class="bt-liquid" d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#8E88E6"/><circle class="bt-drop" cx="40" cy="30" r="5" fill="#C8E36B"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path class="bt-leaf" d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#3E3A8C"/></svg></div>
           <div class="flavor-body">
             <h3>Blue Ternate</h3>
             <p>A deep blue-purple brew made with butterfly pea flowers from our garden. Add a squeeze of citrus and watch it change color.</p>
+            <button type="button" class="squeeze" id="squeezeBtn" aria-pressed="false"><span class="calamansi" aria-hidden="true"></span><span class="sq-label">Squeeze a calamansi</span></button>
+            <p class="sq-note" id="sqNote" aria-live="polite"></p>
             <div class="tags"><span class="tag">Rich in antioxidants</span><span class="tag">Probiotic</span><span class="tag">Natural blue</span></div>
           </div>
         </article>
-        <article class="flavor f-green">
+        <article class="flavor f-green" data-grow style="--d:0.10s">
           <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#C9E4A0"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#3A603C"/></svg></div>
           <div class="flavor-body">
             <h3>Moringa</h3>
@@ -538,7 +588,7 @@ textarea{min-height:120px;resize:vertical}
             <div class="tags"><span class="tag">Nutrient-dense</span><span class="tag">Natural energy</span></div>
           </div>
         </article>
-        <article class="flavor f-red">
+        <article class="flavor f-red" data-grow style="--d:0.20s">
           <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#E78A9D"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#9E1F3D"/></svg></div>
           <div class="flavor-body">
             <h3>Roselle Flower</h3>
@@ -546,7 +596,7 @@ textarea{min-height:120px;resize:vertical}
             <div class="tags"><span class="tag">High in vitamin C</span><span class="tag">Tart &amp; refreshing</span></div>
           </div>
         </article>
-        <article class="flavor f-gold">
+        <article class="flavor f-gold" data-grow style="--d:0.30s">
           <div class="flavor-art"><svg viewBox="0 0 80 180" aria-hidden="true"><rect x="28" y="4" width="24" height="14" rx="4" fill="#2B4425"/><path d="M31 18 h18 v22 c0 10 19 16 19 34 v94 a8 8 0 0 1 -8 8 h-40 a8 8 0 0 1 -8 -8 v-94 c0 -18 19 -24 19 -34Z" fill="rgba(255,255,255,.3)"/><path d="M16 86 h48 v82 a6 6 0 0 1 -6 6 h-36 a6 6 0 0 1 -6 -6Z" fill="#F8DA97"/><rect x="12" y="104" width="56" height="44" rx="6" fill="#F4F3EA"/><path d="M33 134 C33 122 40 116 50 115 C50 127 44 134 33 134Z" fill="#6B4C25"/></svg></div>
           <div class="flavor-body">
             <h3>Turmeric</h3>
@@ -562,26 +612,26 @@ textarea{min-height:120px;resize:vertical}
   <!-- METHODS -->
   <section class="methods" id="methods">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-grow>
         <p class="eyebrow">Our farm</p>
         <h2>How we grow everything we sell</h2>
       </div>
       <div class="cards">
-        <article class="card">
+        <article class="card" data-grow style="--d:0.00s">
           <div class="icon" aria-hidden="true">
             <svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="31" fill="none" stroke="#3A603C" stroke-width="6"/><path d="M24 48 C24 32 34 24 48 24 C48 38 40 48 24 48Z" fill="#689A36"/></svg>
           </div>
           <h3>Permaculture</h3>
           <p>We design the whole farm as one system, so water, soil, plants, animals and people support each other.</p>
         </article>
-        <article class="card">
+        <article class="card" data-grow style="--d:0.12s">
           <div class="icon" aria-hidden="true">
-            <svg width="72" height="72" viewBox="0 0 72 72"><rect x="25" y="12" width="22" height="12" rx="6" fill="#689A36"/><rect x="15" y="30" width="42" height="12" rx="6" fill="#3A603C"/><rect x="5" y="48" width="62" height="12" rx="6" fill="#2B4425"/></svg>
+            <svg class="layers-icon" width="72" height="72" viewBox="0 0 72 72"><rect x="25" y="12" width="22" height="12" rx="6" fill="#689A36"/><rect x="15" y="30" width="42" height="12" rx="6" fill="#3A603C"/><rect x="5" y="48" width="62" height="12" rx="6" fill="#2B4425"/></svg>
           </div>
           <h3>Syntropic Farming</h3>
           <p>We plant in layers and in succession, from groundcover to canopy, and prune often to feed the soil, the way a forest does.</p>
         </article>
-        <article class="card">
+        <article class="card" data-grow style="--d:0.24s">
           <div class="icon" aria-hidden="true">
             <svg width="72" height="72" viewBox="0 0 72 72"><path d="M36 38 C36 24 44 14 58 12 C58 28 50 38 36 38Z" fill="#689A36"/><rect x="33" y="34" width="6" height="14" rx="3" fill="#3A603C"/><path d="M6 64 C6 50 20 44 36 44 C52 44 66 50 66 64Z" fill="#6B4C25"/></svg>
           </div>
@@ -595,79 +645,79 @@ textarea{min-height:120px;resize:vertical}
   <!-- GALLERY -->
   <section class="gallery" id="gallery">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" data-grow>
         <p class="eyebrow">Around the farm</p>
         <h2>A look at Perissos</h2>
         <p class="lead">Our hills, crops, animals and the people who tend them. Tap a photo to see it larger.</p>
       </div>
       <div class="g-grid">
-        <figure class="g-item g-big">
+        <figure class="g-item g-big" data-grow style="--d:0.00s">
           <button type="button" class="g-open" data-full="assets/gallery/farm-landscape-1200.webp" data-cap="The farm in the hills of Peñablanca" aria-label="Enlarge photo: The farm in the hills of Peñablanca">
             <img src="assets/gallery/farm-landscape-600.webp" srcset="assets/gallery/farm-landscape-600.webp 600w, assets/gallery/farm-landscape-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="400" alt="The farm in the green hills of Peñablanca, with banana groves and a bamboo hut" loading="lazy" decoding="async">
           </button>
           <figcaption>The farm in the hills of Peñablanca</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.06s">
           <button type="button" class="g-open" data-full="assets/gallery/butterfly-pea-drying-1200.webp" data-cap="Butterfly pea flowers drying" aria-label="Enlarge photo: Butterfly pea flowers drying">
             <img src="assets/gallery/butterfly-pea-drying-600.webp" srcset="assets/gallery/butterfly-pea-drying-600.webp 600w, assets/gallery/butterfly-pea-drying-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Butterfly pea flowers drying under a bamboo shade house" loading="lazy" decoding="async">
           </button>
           <figcaption>Butterfly pea flowers drying</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.12s">
           <button type="button" class="g-open" data-full="assets/gallery/roselle-harvest-1200.webp" data-cap="Roselle harvest" aria-label="Enlarge photo: Roselle harvest">
             <img src="assets/gallery/roselle-harvest-600.webp" srcset="assets/gallery/roselle-harvest-600.webp 600w, assets/gallery/roselle-harvest-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Freshly harvested ruby-red roselle calyces" loading="lazy" decoding="async">
           </button>
           <figcaption>Roselle harvest</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.18s">
           <button type="button" class="g-open" data-full="assets/gallery/pigs-1200.webp" data-cap="Our pigs on natural deep bedding" aria-label="Enlarge photo: Our pigs on natural deep bedding">
             <img src="assets/gallery/pigs-600.webp" srcset="assets/gallery/pigs-600.webp 600w, assets/gallery/pigs-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Black and red pigs on deep bedding in a bamboo pen" loading="lazy" decoding="async">
           </button>
           <figcaption>Our pigs on natural deep bedding</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.24s">
           <button type="button" class="g-open" data-full="assets/gallery/seedlings-1200.webp" data-cap="Seedlings in the nursery" aria-label="Enlarge photo: Seedlings in the nursery">
             <img src="assets/gallery/seedlings-600.webp" srcset="assets/gallery/seedlings-600.webp 600w, assets/gallery/seedlings-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Trays of young seedlings in the nursery" loading="lazy" decoding="async">
           </button>
           <figcaption>Seedlings in the nursery</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.00s">
           <button type="button" class="g-open" data-full="assets/gallery/butterfly-pea-vine-1200.webp" data-cap="Butterfly pea in bloom" aria-label="Enlarge photo: Butterfly pea in bloom">
             <img src="assets/gallery/butterfly-pea-vine-600.webp" srcset="assets/gallery/butterfly-pea-vine-600.webp 600w, assets/gallery/butterfly-pea-vine-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Butterfly pea vines blooming on a bamboo trellis" loading="lazy" decoding="async">
           </button>
           <figcaption>Butterfly pea in bloom</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.06s">
           <button type="button" class="g-open" data-full="assets/gallery/mushroom-house-1200.webp" data-cap="Inside the mushroom house" aria-label="Enlarge photo: Inside the mushroom house">
             <img src="assets/gallery/mushroom-house-600.webp" srcset="assets/gallery/mushroom-house-600.webp 600w, assets/gallery/mushroom-house-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Rows of mushroom fruiting bags on bamboo racks" loading="lazy" decoding="async">
           </button>
           <figcaption>Inside the mushroom house</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.12s">
           <button type="button" class="g-open" data-full="assets/gallery/pigeon-pea-1200.webp" data-cap="Kardis (pigeon pea) in pod" aria-label="Enlarge photo: Kardis (pigeon pea) in pod">
             <img src="assets/gallery/pigeon-pea-600.webp" srcset="assets/gallery/pigeon-pea-600.webp 600w, assets/gallery/pigeon-pea-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Kardis (pigeon pea) shrub heavy with pods" loading="lazy" decoding="async">
           </button>
           <figcaption>Kardis (pigeon pea) in pod</figcaption>
         </figure>
-        <figure class="g-item g-wide">
+        <figure class="g-item g-wide" data-grow style="--d:0.18s">
           <button type="button" class="g-open" data-full="assets/gallery/planting-day-1200.webp" data-cap="Planting a syntropic row" aria-label="Enlarge photo: Planting a syntropic row">
             <img src="assets/gallery/planting-day-600.webp" srcset="assets/gallery/planting-day-600.webp 600w, assets/gallery/planting-day-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Farm team planting trees along a syntropic row" loading="lazy" decoding="async">
           </button>
           <figcaption>Planting a syntropic row</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.24s">
           <button type="button" class="g-open" data-full="assets/gallery/roselle-plant-1200.webp" data-cap="Roselle ready to pick" aria-label="Enlarge photo: Roselle ready to pick">
             <img src="assets/gallery/roselle-plant-600.webp" srcset="assets/gallery/roselle-plant-600.webp 600w, assets/gallery/roselle-plant-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Roselle plants covered in red calyces" loading="lazy" decoding="async">
           </button>
           <figcaption>Roselle ready to pick</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.00s">
           <button type="button" class="g-open" data-full="assets/gallery/bamboo-trellis-1200.webp" data-cap="Vegetables under bamboo trellises" aria-label="Enlarge photo: Vegetables under bamboo trellises">
             <img src="assets/gallery/bamboo-trellis-600.webp" srcset="assets/gallery/bamboo-trellis-600.webp 600w, assets/gallery/bamboo-trellis-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="338" alt="Vegetable beds under a bamboo trellis" loading="lazy" decoding="async">
           </button>
           <figcaption>Vegetables under bamboo trellises</figcaption>
         </figure>
-        <figure class="g-item">
+        <figure class="g-item" data-grow style="--d:0.06s">
           <button type="button" class="g-open" data-full="assets/gallery/dragon-fruit-1200.webp" data-cap="Dragon fruit beds" aria-label="Enlarge photo: Dragon fruit beds">
             <img src="assets/gallery/dragon-fruit-600.webp" srcset="assets/gallery/dragon-fruit-600.webp 600w, assets/gallery/dragon-fruit-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 380px" width="600" height="450" alt="Dragon fruit cuttings planted in mulched beds" loading="lazy" decoding="async">
           </button>
@@ -688,7 +738,7 @@ textarea{min-height:120px;resize:vertical}
     <div class="wrap name-grid">
       <div>
         <p class="eyebrow">Why we are called Perissos</p>
-        <blockquote>“I am come that they might have life, and that they might have it more abundantly.”</blockquote>
+        <blockquote data-grow>“I am come that they might have life, and that they might have it more abundantly.”</blockquote>
         <p class="ref">John 10:10</p>
       </div>
       <p class="note"><strong>Perissos</strong> (περισσός, say <em>peh-ree-SOS</em>) is the Greek word behind “more abundantly”: overflowing, more than enough. It is what we see when land is cared for well. Soil, harvests and community grow richer every season.</p>
@@ -788,6 +838,36 @@ textarea{min-height:120px;resize:vertical}
   });
   document.getElementById('gClose').addEventListener('click',function(){gv.close();});
   gv.addEventListener('click',function(e){if(e.target===gv)gv.close();});
+  // ---------- Farm-themed motion ----------
+  (function(){
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('[data-grow]');
+    if (!reduce && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('anim');
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('grown'); io.unobserve(e.target); } });
+      }, {rootMargin:'0px 0px -8% 0px', threshold:.12});
+      items.forEach(function(el){ io.observe(el); });
+    }
+    // Blue Ternate: squeeze a calamansi
+    var card=document.getElementById('blueTernate'), btn=document.getElementById('squeezeBtn'), note=document.getElementById('sqNote');
+    if(card&&btn){
+      btn.addEventListener('click',function(){
+        var on=!card.classList.contains('squeezed');
+        if(on){
+          card.classList.remove('dropping'); void card.offsetWidth; card.classList.add('dropping');
+          setTimeout(function(){card.classList.add('squeezed');}, reduce?0:250);
+          btn.querySelector('.sq-label').textContent='Pour a fresh glass';
+          note.textContent='The butterfly pea turns pink when it meets citrus. Try it at home!';
+        } else {
+          card.classList.remove('squeezed','dropping');
+          btn.querySelector('.sq-label').textContent='Squeeze a calamansi';
+          note.textContent='';
+        }
+        btn.setAttribute('aria-pressed', on?'true':'false');
+      });
+    }
+  })();
 </script>
 </body>
 </html>
