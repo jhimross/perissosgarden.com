@@ -82,7 +82,7 @@ If the domain changes from `perissosgarden.com`, update it in `index.html` (cano
 
 | Service | Where | Notes |
 |---|---|---|
-| **Google Analytics 4** | `<head>` of `index.html` | Measurement ID `G-5B7DY41MQ1`. Check *Reports → Realtime* after launch. |
+| **Google Analytics 4** | `<head>` of `index.html` | Measurement ID `G-PR7JD2F5W2`. Check *Reports → Realtime* after launch. |
 | **Web3Forms** | Contact form | Sends messages to the email linked to the access key. Works only on the live site. Send a test message after launch. |
 | **Google Maps embed** | Map section | Loads lazily. Blank in some previews (e.g. inside the Claude app) — normal; it shows on the live site. |
 | **Google Fonts** | `<head>` | Marcellus (headings), Jost (body and labels), Caveat (one handwritten accent line). |
