@@ -133,11 +133,12 @@
  ]
 }
 </script>
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/hero-farm-900.webp" imagesrcset="assets/hero-farm-600.webp 600w, assets/hero-farm-900.webp 900w, assets/hero-farm-1200.webp 1200w, assets/hero-farm-1448.webp 1448w" imagesizes="(max-width: 900px) 92vw, 520px" fetchpriority="high">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@400;500;600&family=Caveat:wght@600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@400;500;600&family=Caveat:wght@600&display=swap">
 <style>
@@ -210,6 +211,7 @@ section{padding-block:88px}
 .chip{font-size:13px;font-weight:500;letter-spacing:.08em;padding:6px 14px;border-radius:999px;background:var(--mist);color:var(--canopy)}
 .hero-art{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--canopy);aspect-ratio:5/5.4;max-width:100%}
 .hero-art svg{width:100%;height:100%;display:block}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:45% 50%;display:block}
 .hero-badge{position:absolute;left:20px;bottom:20px;background:var(--husk);border-radius:var(--r-md);padding:14px 18px;display:flex;align-items:center;gap:12px;max-width:calc(100% - 40px)}
 .hero-badge img{height:40px;width:auto}
 .hero-badge p{font-size:14px;line-height:1.35;color:var(--ink)}
@@ -349,8 +351,8 @@ textarea{min-height:120px;resize:vertical}
 <header class="site-header">
   <div class="wrap header-row">
     <a class="brand" href="#top" aria-label="Perissos Sustainable Garden, home">
-      <img class="mark" src="/assets/perissos-mark.webp" width="86" height="112" alt="" fetchpriority="high">
-      <img class="word" src="/assets/perissos-wordmark.webp" width="392" height="80" alt="Perissos Sustainable Garden" fetchpriority="high">
+      <img class="mark" src="assets/perissos-mark.webp" width="86" height="112" alt="" fetchpriority="high">
+      <img class="word" src="assets/perissos-wordmark.webp" width="392" height="80" alt="Perissos Sustainable Garden" fetchpriority="high">
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav">Menu</button>
     <nav class="nav" id="siteNav" aria-label="Main">
@@ -383,42 +385,12 @@ textarea{min-height:120px;resize:vertical}
         <p class="script">Cultivating abundant life. Stewarding God's creation.</p>
       </div>
 
-      <!-- Replace this illustration with a real farm photo: <img src="your-photo.jpg" alt="..." style="width:100%;height:100%;object-fit:cover"> -->
+      <!-- Hero photo: Perissos farm image -->
       <div class="hero-art">
-        <svg viewBox="0 0 500 540" role="img" aria-label="Illustration of a syntropic food forest in layers, from groundcover to tall canopy trees">
-          <rect width="500" height="540" fill="#2B4425"/>
-          <circle cx="390" cy="110" r="46" fill="#E2A63B"/>
-          <!-- canopy trees -->
-          <rect x="88" y="150" width="14" height="300" rx="7" fill="#6B4C25"/>
-          <path d="M95 70 C40 120 40 200 95 230 C150 200 150 120 95 70Z" fill="#3A603C"/>
-          <rect x="318" y="190" width="14" height="260" rx="7" fill="#6B4C25"/>
-          <path d="M325 120 C275 165 275 235 325 262 C375 235 375 165 325 120Z" fill="#3A603C"/>
-          <!-- mid layer -->
-          <rect x="208" y="268" width="12" height="180" rx="6" fill="#6B4C25"/>
-          <path d="M214 205 C175 240 175 295 214 318 C253 295 253 240 214 205Z" fill="#689A36"/>
-          <rect x="420" y="300" width="12" height="150" rx="6" fill="#6B4C25"/>
-          <path d="M426 248 C395 275 395 318 426 338 C457 318 457 275 426 248Z" fill="#689A36"/>
-          <!-- shrubs -->
-          <circle cx="150" cy="392" r="38" fill="#689A36"/>
-          <circle cx="270" cy="398" r="34" fill="#3A603C"/>
-          <circle cx="375" cy="404" r="30" fill="#689A36"/>
-          <circle cx="40" cy="404" r="30" fill="#3A603C"/>
-          <!-- groundcover leaves -->
-          <g fill="#E3EDCF">
-            <path d="M30 448 q14 -26 28 0 q-14 10 -28 0Z"/>
-            <path d="M110 446 q14 -26 28 0 q-14 10 -28 0Z"/>
-            <path d="M190 448 q14 -26 28 0 q-14 10 -28 0Z"/>
-            <path d="M270 446 q14 -26 28 0 q-14 10 -28 0Z"/>
-            <path d="M350 448 q14 -26 28 0 q-14 10 -28 0Z"/>
-            <path d="M430 446 q14 -26 28 0 q-14 10 -28 0Z"/>
-          </g>
-          <!-- soil + mulch bands -->
-          <rect y="452" width="500" height="22" fill="#6B4C25"/>
-          <rect y="474" width="500" height="66" fill="#4E3719"/>
-        </svg>
+        <img class="hero-photo" src="assets/hero-farm-900.webp" srcset="assets/hero-farm-600.webp 600w, assets/hero-farm-900.webp 900w, assets/hero-farm-1200.webp 1200w, assets/hero-farm-1448.webp 1448w" sizes="(max-width: 900px) 92vw, 520px" width="900" height="675" alt="Permaculture farm with layered banana, papaya and fruit trees, mulched vegetable rows, a pond, a bahay kubo hut and free-range chickens" fetchpriority="high" decoding="async">
         <div class="hero-badge">
-          <img src="/assets/perissos-mark.webp" width="86" height="112" alt="" decoding="async">
-          <p><strong>Layered, living rows</strong>Groundcover to canopy, all working together</p>
+          <img src="assets/perissos-mark.webp" width="86" height="112" alt="" decoding="async">
+          <p><strong>Grown in living soil</strong>No chemical fertilizers or pesticides</p>
         </div>
       </div>
     </div>
@@ -625,8 +597,8 @@ textarea{min-height:120px;resize:vertical}
     <div class="foot-grid">
       <div class="foot-brand">
         <div class="lockup">
-          <img class="mark" src="/assets/perissos-mark-light.webp" width="86" height="112" alt="" loading="lazy" decoding="async">
-          <img class="word" src="/assets/perissos-wordmark-light.webp" width="392" height="80" alt="Perissos Sustainable Garden" loading="lazy" decoding="async">
+          <img class="mark" src="assets/perissos-mark-light.webp" width="86" height="112" alt="" loading="lazy" decoding="async">
+          <img class="word" src="assets/perissos-wordmark-light.webp" width="392" height="80" alt="Perissos Sustainable Garden" loading="lazy" decoding="async">
         </div>
         <p>Permaculture · Syntropic Farming · Natural Farming</p>
         <p class="script">Cultivating abundant life. Stewarding God's creation.</p>
