@@ -20,7 +20,7 @@ A static, single-page site built with plain HTML, CSS and a little vanilla JavaS
 | Section | Anchor | What it shows |
 |---|---|---|
 | Header | — | Logo, menu (collapses into a "Menu" button on phones), "Order now" button |
-| Hero | `#top` | Headline "Naturally grown. Fresh from our farm to your table.", farm photo, methods, tagline with growing-sprout animation |
+| Hero | `#top` | Headline "Fresh from our farm to your table.", farm photo, methods, tagline with growing-sprout animation |
 | Fresh produce + How to order | `#produce` | Chemical-free produce and the three ways to order |
 | Farm products | `#products` | Pork, mushrooms, kardis, lemongrass, organic fertilizer, and four kombucha flavors |
 | Our farm | `#methods` | Permaculture, syntropic farming, natural farming |
