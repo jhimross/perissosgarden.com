@@ -26,8 +26,9 @@ A static, single-page site built with plain HTML, CSS and a little vanilla JavaS
 | Our farm | `#methods` | Permaculture, syntropic farming, natural farming |
 | Gallery | `#gallery` | 12 farm photos with a tap-to-enlarge viewer |
 | The name | `#about` | John 10:10 and the meaning of *Perissos* |
+| FAQs | `#faq` | 9 common questions in an accordion, with FAQPage structured data |
 | Contact | `#contact` | Contact details, social icons, Web3Forms contact form |
-| Map | — | Full-width Google Map and "Get directions" button |
+| Map | `#map` | Full-width Google Map and "Get directions" button |
 | Footer | — | Reverse logo, links, contact details |
 
 ---
@@ -151,6 +152,7 @@ All edits are in `index.html`.
 | Phone / email | `0917 854 0644` and `info@perissosgarden.com` (contact section, footer, structured data) |
 | A product's text | `<article class="good">` (farm products) or `<article class="flavor …">` (kombucha) |
 | A product photo | Replace the file in `assets/` with the same name, or update its `src`, `width` and `height` |
+| An FAQ | `<details class="faq-item">` in `#faq`, and the matching entry in the `FAQPage` JSON-LD in `<head>` |
 | Gallery photos | `<figure class="g-item">` inside `#gallery`; add both a `-600.webp` and a `-1200.webp` version |
 | Hero photo | `assets/hero-farm-*.webp` (four sizes) and the matching `<link rel="preload" as="image">` in `<head>` |
 | Brand colors | CSS variables at the top of the `<style>` block |
@@ -162,7 +164,7 @@ Tip: resize new photos before uploading (600–1200 px wide, WebP or JPEG at ~70
 
 ## Still to fill in
 
-- [ ] Usual reply time — the placeholder **[1–2 days]** appears twice (How to order, Contact)
+- [ ] Usual reply time — the placeholder **[1–2 days]** appears once (How to order)
 - [ ] Confirm the harvest-list day ("posted every Friday") and pick-up / delivery areas
 - [ ] Confirm the mushroom varieties listed (oyster, straw, wood ear)
 - [ ] Verify each social link opens the right @perissosgarden profile

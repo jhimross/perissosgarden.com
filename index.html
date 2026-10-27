@@ -42,6 +42,86 @@
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I order?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Message us on Facebook or Instagram @perissosgarden, call or text 0917 854 0644, or use the order form on our website. Tell us what you would like, how much, whether it is for pick-up or delivery (with your location), and your preferred date. We will confirm availability and the total."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is available right now?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Our harvest changes with the season, so just ask and we will send you this week's list. We usually have fresh vegetables and herbs, mushrooms, kardis (pigeon pea), lemongrass and kombucha, with pork available by reservation."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is your produce organic?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Our produce is naturally grown, with no chemical fertilizers or pesticides. We care for the soil using permaculture, syntropic farming and natural farming methods."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you deliver?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Pick-up at the farm is available. For delivery, send us your location and we will let you know if we can bring your order to you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I order pork or lechon?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. We offer farm-raised pork as live weight, meat cuts, or whole lechon. Please reserve lechon in advance and tell us your date so we can prepare it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What kombucha flavors do you have?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Our kombucha is brewed on the farm with plants we grow: Blue Ternate, Moringa, Roselle and Turmeric-Ginger."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much are your products?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Prices depend on the item and the season. Tell us what you are interested in and we will send you the current price list."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do you accept bulk or wholesale orders?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Cafés, restaurants, stores and resellers are welcome. Tell us what you need and how often, and we will get back to you with options."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I visit the farm?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "We would love to have you. Visits are by appointment, so please message us your preferred date and the number of people in your group. We are in Peñablanca, Cagayan, a short drive from Tuguegarao City."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
  "@type": "WebSite",
  "@id": "https://perissosgarden.com/#website",
  "name": "Perissos Sustainable Garden",
@@ -338,7 +418,7 @@ textarea{min-height:120px;resize:vertical}
 @media (max-width:420px){.farm-goods{grid-template-columns:1fr}}
 
 /* Render below-the-fold sections lazily (faster first paint) */
-.methods,.name-band,.contact{content-visibility:auto;contain-intrinsic-size:auto 900px}
+.methods,.name-band,.faq,.contact{content-visibility:auto;contain-intrinsic-size:auto 900px}
 
 /* Gallery */
 .gallery{background:var(--husk)}
@@ -424,6 +504,28 @@ textarea{min-height:120px;resize:vertical}
 .site-footer a:hover{color:var(--husk)}
 .foot-bottom{margin-top:44px;padding-top:20px;border-top:1px solid rgba(227,237,207,.2);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#AEB8A3}
 @media (max-width:900px){.foot-grid{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{background:var(--husk)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:56px;align-items:start}
+.faq-head h2{margin:12px 0 16px}
+.faq-head .lead{margin:0}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--white);border:1px solid var(--line);border-radius:16px;transition:border-color .2s ease,box-shadow .2s ease}
+.faq-item[open]{border-color:var(--sprout);box-shadow:0 8px 24px rgba(31,46,28,.08)}
+.faq-item summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:18px 22px;cursor:pointer;font-family:var(--display);font-size:20px;line-height:1.3;color:var(--canopy)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:16px}
+.faq-icon{position:relative;flex:0 0 28px;height:28px;border-radius:50%;background:var(--mist)}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:var(--forest);border-radius:2px;transition:transform .25s ease}
+.faq-icon::after{transform:rotate(90deg)}
+.faq-item[open] .faq-icon{background:var(--forest)}
+.faq-item[open] .faq-icon::before,.faq-item[open] .faq-icon::after{background:var(--husk)}
+.faq-item[open] .faq-icon::after{transform:rotate(0)}
+.faq-item p{margin:0;padding:0 22px 20px;color:var(--ink-muted)}
+.faq-item a{color:var(--forest)}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr;gap:28px}.faq-item summary{font-size:18px;padding:16px 18px}.faq-item p{padding:0 18px 18px}}
+@media (prefers-reduced-motion:reduce){.faq-icon::before,.faq-icon::after,.faq-item{transition:none}}
 </style>
 </head>
 <body>
@@ -441,6 +543,7 @@ textarea{min-height:120px;resize:vertical}
       <a href="#methods">Our Farm</a>
       <a href="#gallery">Gallery</a>
       <a href="#about">About</a>
+      <a href="#faq">FAQs</a>
       <a class="btn btn-primary" href="#contact">Order now</a>
     </nav>
   </div>
@@ -737,12 +840,61 @@ textarea{min-height:120px;resize:vertical}
   </section>
 
   <!-- CONTACT -->
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap faq-grid">
+      <div class="faq-head" data-grow>
+        <p class="eyebrow">Questions</p>
+        <h2>Frequently asked questions</h2>
+        <p class="lead">Can't find your answer? <a href="#contact">Send us a message</a> or call 0917 854 0644.</p>
+      </div>
+      <div class="faq-list" data-grow style="--d:.12s">
+        <details class="faq-item" open>
+          <summary><span>How do I order?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Message us on <a href="https://www.facebook.com/perissosgarden" target="_blank" rel="noopener">Facebook</a> or <a href="https://www.instagram.com/perissosgarden" target="_blank" rel="noopener">Instagram</a> @perissosgarden, call or text <a href="tel:+639178540644">0917 854 0644</a>, or use the <a href="#contact">order form</a>. Tell us what you would like, how much, whether it is for pick-up or delivery (with your location), and your preferred date. We will confirm availability and the total.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>What is available right now?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Our harvest changes with the season, so just ask and we will send you this week's list. We usually have fresh vegetables and herbs, mushrooms, kardis (pigeon pea), lemongrass and kombucha, with pork available by reservation.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>Is your produce organic?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Our produce is naturally grown, with no chemical fertilizers or pesticides. We care for the soil using permaculture, syntropic farming and natural farming methods.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>Do you deliver?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Pick-up at the farm is available. For delivery, send us your location and we will let you know if we can bring your order to you.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>Can I order pork or lechon?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Yes. We offer farm-raised pork as live weight, meat cuts, or whole lechon. Please reserve lechon in advance and tell us your date so we can prepare it.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>What kombucha flavors do you have?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Our kombucha is brewed on the farm with plants we grow: Blue Ternate, Moringa, Roselle and Turmeric-Ginger.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>How much are your products?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Prices depend on the item and the season. Tell us what you are interested in and we will send you the current price list.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>Do you accept bulk or wholesale orders?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>Yes. Cafés, restaurants, stores and resellers are welcome. Tell us what you need and how often, and we will get back to you with options.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>Can I visit the farm?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <p>We would love to have you. Visits are by appointment, so please message us your preferred date and the number of people in your group. We are in Peñablanca, Cagayan, a short drive from Tuguegarao City. See the <a href="#map">map below</a> for directions.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="contact" id="contact">
     <div class="wrap contact-grid">
       <div class="contact-info">
         <p class="eyebrow">Order or get in touch</p>
         <h2>Let's get you something fresh</h2>
-        <p class="lead">Send us a message to order produce or farm products, or to ask about wholesale. We're in Peñablanca, Cagayan, a short drive from Tuguegarao City. We usually reply within [1–2 days].</p>
+        <p class="lead">Send us a message to order produce or farm products, or to ask about wholesale. We're in Peñablanca, Cagayan, a short drive from Tuguegarao City.</p>
         <div class="info-row"><span>Location</span><p>Peñablanca, Cagayan</p></div>
         <div class="info-row"><span>Phone</span><p>0917 854 0644</p></div>
         <div class="info-row"><span>Email</span><p>info@perissosgarden.com</p></div>
@@ -760,7 +912,7 @@ textarea{min-height:120px;resize:vertical}
   </section>
 
   <!-- MAP -->
-  <section class="map-band" aria-label="Map to Perissos Sustainable Garden">
+  <section class="map-band" id="map" aria-label="Map to Perissos Sustainable Garden">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3798.478289808829!2d121.84229807517484!3d17.816199983145935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3385ed007e7f746f%3A0x964519ab611154fd!2sPerissos%20Sustainable%20Garden!5e0!3m2!1sen!2sph!4v1792680021116!5m2!1sen!2sph" title="Perissos Sustainable Garden on Google Maps" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     <div class="map-link"><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=Perissos%20Sustainable%20Garden%2C%20Pe%C3%B1ablanca%2C%20Cagayan" target="_blank" rel="noopener">Get directions on Google Maps</a></div>
   </section>
@@ -786,6 +938,7 @@ textarea{min-height:120px;resize:vertical}
           <li><a href="#methods">Our Farm</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#faq">FAQs</a></li>
           <li><a href="#contact">Order</a></li>
         </ul>
       </div>
