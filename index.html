@@ -860,5 +860,205 @@ textarea{min-height:120px;resize:vertical}
     }
   })();
 </script>
+<!-- Perissos Messenger chat widget (fonts already loaded in <head>) -->
+<style>
+  .psg-chat {
+    --psg-canopy: #2B4425;
+    --psg-forest: #3A603C;
+    --psg-leaf: #689A36;
+    --psg-harvest: #E2A63B;
+    --psg-ink: #1F2E1C;
+    --psg-ink-muted: #56634F;
+    --psg-surface: #FFFFFF;
+    --psg-line: #D9DCC8;
+    position: fixed;
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    z-index: 2147483000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    font-family: "Jost", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  /* Greeting bubble */
+  .psg-chat__bubble {
+    position: relative;
+    width: min(300px, calc(100vw - 40px));
+    box-sizing: border-box;
+    padding: 16px 40px 16px 18px;
+    background: var(--psg-surface);
+    color: var(--psg-ink);
+    border: 1px solid var(--psg-line);
+    border-radius: 18px 18px 4px 18px;
+    box-shadow: 0 10px 30px rgba(31, 46, 28, 0.16);
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .psg-chat__bubble.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .psg-chat__title {
+    margin: 0 0 4px;
+    font-family: "Marcellus", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--psg-canopy);
+  }
+  .psg-chat__text {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--psg-ink-muted);
+  }
+  .psg-chat__cta {
+    display: inline-block;
+    padding: 9px 16px;
+    background: var(--psg-canopy);
+    color: #F4F3EA;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background .2s ease;
+  }
+  .psg-chat__cta:hover { background: var(--psg-forest); }
+  .psg-chat__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--psg-ink-muted);
+    cursor: pointer;
+  }
+  .psg-chat__close:hover { background: #F4F3EA; color: var(--psg-ink); }
+
+  /* Floating button */
+  .psg-chat__button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--psg-canopy);
+    color: #F4F3EA;
+    box-shadow: 0 8px 24px rgba(31, 46, 28, 0.28);
+    text-decoration: none;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .psg-chat__button:hover { background: var(--psg-forest); transform: scale(1.05); }
+  .psg-chat__button svg { width: 30px; height: 30px; }
+  .psg-chat__dot {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--psg-harvest);
+    border: 2px solid var(--psg-canopy);
+  }
+
+  .psg-chat a:focus-visible,
+  .psg-chat button:focus-visible {
+    outline: 3px solid var(--psg-harvest);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 480px) {
+    .psg-chat {
+      right: calc(14px + env(safe-area-inset-right, 0px));
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    }
+    .psg-chat__button { width: 56px; height: 56px; }
+    .psg-chat__title { font-size: 17px; }
+    .psg-chat__text { font-size: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .psg-chat__bubble,
+    .psg-chat__button,
+    .psg-chat__cta { transition: none; }
+    .psg-chat__button:hover { transform: none; }
+  }
+
+  @media print { .psg-chat { display: none; } }
+</style>
+
+<div class="psg-chat" id="psgChat">
+  <div class="psg-chat__bubble" id="psgChatBubble" role="dialog" aria-labelledby="psgChatTitle" aria-hidden="true">
+    <button class="psg-chat__close" id="psgChatClose" type="button" aria-label="Close message" tabindex="-1">
+      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <p class="psg-chat__title" id="psgChatTitle">Kumusta! Welcome to Perissos</p>
+    <p class="psg-chat__text">Have a question about our fresh produce, kombucha or orders? Send us a message and we’ll reply on Messenger.</p>
+    <a class="psg-chat__cta psg-chat__link" href="https://www.messenger.com/t/1380495438481273" target="_blank" rel="noopener" tabindex="-1">Chat with us</a>
+  </div>
+
+  <a class="psg-chat__button psg-chat__link" href="https://www.messenger.com/t/1380495438481273" target="_blank" rel="noopener" aria-label="Chat with Perissos Sustainable Garden on Messenger">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16 3C8.8 3 3 8.4 3 15.1c0 3.8 1.9 7.2 4.9 9.4V29l4.4-2.4c1.2.3 2.4.5 3.7.5 7.2 0 13-5.4 13-12.1S23.2 3 16 3z" fill="currentColor"/>
+      <path d="M10.5 18.5c3.5.6 7.6-1.4 10.5-6.5-4.6.2-8.3 1.6-10.5 6.5zm0 0c1.4-2.2 3.4-3.6 6-4.4" fill="none" stroke="#2B4425" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="psg-chat__dot" id="psgChatDot" aria-hidden="true"></span>
+  </a>
+</div>
+
+<script>
+  (function () {
+    // Change this if your Messenger link ever changes
+    var MESSENGER_URL = "https://www.messenger.com/t/1380495438481273";
+    var SHOW_AFTER_MS = 2500; // greeting appears 2.5 seconds after each page visit
+
+    var bubble = document.getElementById("psgChatBubble");
+    var closeBtn = document.getElementById("psgChatClose");
+    var dot = document.getElementById("psgChatDot");
+    var links = document.querySelectorAll("#psgChat .psg-chat__link");
+    if (!bubble) return;
+
+    links.forEach(function (a) { a.href = MESSENGER_URL; });
+
+    function setFocusable(on) {
+      closeBtn.tabIndex = on ? 0 : -1;
+      bubble.querySelector(".psg-chat__cta").tabIndex = on ? 0 : -1;
+    }
+
+    function showBubble() {
+      bubble.classList.add("is-visible");
+      bubble.setAttribute("aria-hidden", "false");
+      setFocusable(true);
+    }
+
+    function hideBubble() {
+      bubble.classList.remove("is-visible");
+      bubble.setAttribute("aria-hidden", "true");
+      setFocusable(false);
+      dot.style.display = "none";
+    }
+
+    // Shows on every visit (nothing is remembered between visits)
+    setTimeout(showBubble, SHOW_AFTER_MS);
+
+    closeBtn.addEventListener("click", hideBubble);
+    links.forEach(function (a) { a.addEventListener("click", hideBubble); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") hideBubble();
+    });
+  })();
+</script>
+<!-- ============ End Perissos chat widget ============ -->
 </body>
 </html>
